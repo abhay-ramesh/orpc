@@ -23,9 +23,9 @@ export type ClientRest<TClientContext extends ClientContext, TInput> = Record<ne
 
 export type ClientPromiseResult<TOutput, TError> = PromiseWithError<TOutput, TError>
 
-export interface Client<TClientContext extends ClientContext, TInput, TOutput, TError> {
-  (...rest: ClientRest<TClientContext, TInput>): ClientPromiseResult<TOutput, TError>
-}
+export type Client<TClientContext extends ClientContext, TInput, TOutput, TError> = (
+  ...rest: ClientRest<TClientContext, TInput>
+) => ClientPromiseResult<TOutput, TError>
 
 export type NestedClient<TClientContext extends ClientContext> = Client<TClientContext, any, any, any> | {
   [k: string]: NestedClient<TClientContext>
